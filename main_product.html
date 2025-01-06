@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Bakery Products</title>
+    <link rel="stylesheet" href="product.css">
+    <style>
+        /* Cart styles */
+        .cart {
+    position: fixed;
+    bottom: 100px;
+    left: 20px;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+        .cart ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .cart ul li {
+            margin: 5px 0;
+        }
+        .cart-button {
+            position: fixed;
+            bottom: 16px;
+            left: -650px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
+        }
+        .cart-button:hover {
+            background-color: #0056b3;
+        }
+        .cart-button span {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pay-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .pay-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bakery Heading with Slogan -->
+    <h2 class="product-heading">Feel Free to Buy</h2>  
+
+    <!-- Product Container -->
+    <div class="product-container">
+        <div class="products">
+            <!-- Product Card 1 -->
+            <div class="product-card">
+                <img src="chocolate cakepicture.jpeg" alt="Product 1">
+                <h3>Chocolate Cake</h3>
+                <p>Rs 3500</p>
+                <button class="add-to-cart" data-name="Chocolate Cake" data-price="3500">Add to Cart</button>
+            </div>
+
+            <!-- Product Card 2 -->
+            <div class="product-card">
+                <img src="Blueberry Muffin.jpeg" alt="Product 2">
+                <h3>Blueberry Muffin</h3>
+                <p>Rs 1350</p>
+                <button class="add-to-cart" data-name="Blueberry Muffin" data-price="1350">Add to Cart</button>
+            </div>
+
+            <!-- Product Card 3 -->
+            <div class="product-card">
+                <img src="Croissant (1).jpeg" alt="Product 3">
+                <h3>Croissant</h3>
+                <p>Rs 950</p>
+                <button class="add-to-cart" data-name="Croissant" data-price="950">Add to Cart</button>
+            </div>
+
+            <!-- Product Card 4 -->
+            <div class="product-card">
+                <img src="Red Velvet Cake.jpeg" alt="Product 4">
+                <h3>Red Velvet Cake</h3>
+                <p>Rs 4200</p>
+                <button class="add-to-cart" data-name="Red Velvet Cake" data-price="4200">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart -->
+    <div class="cart" id="cart">
+        <h3>Your Cart</h3>
+        <ul id="cart-items"></ul>
+        <p>Total: Rs <span id="cart-total">0</span></p>
+        <button class="pay-button">Pay Now</button>
+    </div>
+
+    <!-- Cart Button -->
+    <button class="cart-button" id="cart-button">
+        &#128722;
+        <span id="cart-count">0</span>
+    </button>
+
+    <script>
+        // Cart logic
+        const cartItems = [];
+        const cartItemsList = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        const cart = document.getElementById('cart');
+        const cartButton = document.getElementById('cart-button');
+        const cartCount = document.getElementById('cart-count');
+        const payButton = document.querySelector('.pay-button');
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
+
+                // Add item to cart array
+                cartItems.push({ name, price });
+
+                // Update cart display
+                updateCartDisplay();
+            });
+        });
+
+        cartButton.addEventListener('click', () => {
+            // Toggle cart visibility
+            cart.style.display = cart.style.display === 'block' ? 'none' : 'block';
+        });
+
+        payButton.addEventListener('click', () => {
+            if (cartItems.length === 0) {
+                alert('Your cart is empty! Add items before proceeding to payment.');
+            } else {
+                alert('Thank you for your purchase! Clearing the cart...');
+                cartItems.length = 0; // Clear cart array
+                updateCartDisplay();
+            }
+        });
+
+        function updateCartDisplay() {
+            // Clear existing items
+            cartItemsList.innerHTML = '';
+
+            // Populate cart items
+            let total = 0;
+            cartItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - Rs ${item.price.toFixed(2)}`;
+                cartItemsList.appendChild(li);
+                total += item.price;
+            });
+
+            // Update total
+            cartTotal.textContent = total.toFixed(2);
+
+            // Update cart count
+            cartCount.textContent = cartItems.length;
+        }
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="z8_X4-rXDz7eHCh_lH-rU";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+
+    </script>
+</body>
+</html>

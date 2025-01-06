@@ -1,0 +1,150 @@
+/* Basic resets */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Verdana', sans-serif;
+    background-color: #f7f4e6; /* Light Cream background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('https://www.example.com/bakery-background.jpg'); /* Add your bakery background image URL */
+    background-size: cover;
+    background-position: center;
+    color: #3e2723; /* Dark Brown text */
+}
+
+/* Register container styling */
+.login-container {
+    width: 100%;
+    max-width: 380px;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.9); /* Light white with opacity for a soft effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    text-align: center;
+    transform: translateY(-50px);
+    opacity: 0;
+    animation: fadeInUp 1s forwards;
+}
+
+/* Heading styling */
+.login-container h2 {
+    font-size: 28px;
+    color: #c27f5c; /* Warm brown color */
+    font-family: 'Pacifico', cursive; /* Bakery-style cursive font */
+    margin-bottom: 30px;
+}
+
+/* Input and button styling */
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-group label {
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    font-size: 14px;
+    color: #8e6f52; /* Light brown for label */
+    background-color: #ffffff;
+    padding: 0 5px;
+    transform: translateY(-50%);
+    transition: all 0.3s;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #f2e0c9; /* Light brown border */
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f7f4e6; /* Soft cream for input background */
+    transition: border 0.3s, background-color 0.3s;
+}
+
+.input-group input:focus, .input-group select:focus {
+    border-color: #c27f5c; /* Warm brown when focused */
+    background-color: #ffffff; /* White when focused */
+    outline: none;
+}
+
+.input-group input:focus + label, .input-group select:focus + label {
+    color: #c27f5c;
+    transform: translateY(-150%);
+    font-size: 12px;
+}
+
+.contact-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-group select {
+    width: 30%;
+}
+
+.contact-group input {
+    width: 65%;
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #f2b97d; /* Light Orange/Brown */
+    color: #ffffff; /* White text */
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #c27f5c; /* Warm brown on hover */
+}
+
+/* Register button styling */
+.register-container {
+    margin-top: 20px;
+}
+
+.register-container p {
+    font-size: 14px;
+    color: #8e6f52; /* Light brown text */
+}
+
+.register-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 12px 25px;
+    background-color: #f2b97d; /* Light Orange/Brown */
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.register-button:hover {
+    background-color: #c27f5c; /* Warm brown on hover */
+}
+
+/* Animation effects */
+@keyframes fadeInUp {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
